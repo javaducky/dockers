@@ -1,0 +1,19 @@
+version: '2'
+services:
+
+  server:
+    image: redis:3.2.8-alpine
+    ports: 
+     - "6379:6379"
+
+  commander:
+    image: osado/redis-commander
+    links:
+     - "server:redis"
+    environment:
+     - REDIS_DB=0
+     - WEB_USER=admin
+     - WEB_PASS=password
+    ports:
+     - "8081:8081"
+
